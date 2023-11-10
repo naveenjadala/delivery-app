@@ -19,16 +19,9 @@ const AuthScreen = (props: Props) => {
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
-            <ScrollView>
             <CurvedCard type={screenNav} onPress={handleOnpress} />
-            <>
-                {screenNav === 'Login' ?
-                    <LoginScreen /> :
-                    <SignupScreen />
-                }
-
-            </>
-            </ScrollView>
+            {screenNav === 'Login' ?
+                <LoginScreen /> : <SignupScreen />}
         </SafeAreaView>
     )
 }

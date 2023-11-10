@@ -27,7 +27,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
             try {
                 retrieveData('token')
                     .then(token => {
-                        setTokenState(true);
+                        console.log(token, "token");
+                        if (token === "") {
+                            setTokenState(false)
+                        } else {
+                            setTokenState(true);
+                        }
                         resolve(token);
                     })
                     .catch(error => {

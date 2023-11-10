@@ -37,21 +37,27 @@ interface restaurants {
   location: string;
 }
 
+type signUpProps = {
+  username: string,
+  email: string,
+  password: string
+}
+
 const login = async (endpoint: string, data: string): Promise<any> => {
   try {
     const response = await apiClient.post(`${endpoints[endpoint]}`, data);
     return response.data;
   } catch (error: any) {
     throw new Error(`API request to ${endpoint} failed${error.message}`);
-  }
+  } 
 };
 
-const signUp = async (endpoint: string, data: loginData): Promise<any> => {
+const signUp = async (endpoint: string, data: string): Promise<any> => {
   try {
-    const response = await apiClient.post(`/${endpoints[endpoint]}`, data);
-    return response;
-  } catch (error) {
-    throw new Error('API request to ${endpoint} failed${error.message}');
+    const response = await apiClient.post(`${endpoints[endpoint]}`, data);
+    return response.data;
+  } catch (error: any) {
+    throw new Error(`API request to ${endpoint} failed${error.message}`);
   }
 };
 
