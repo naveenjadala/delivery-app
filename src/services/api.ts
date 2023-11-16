@@ -1,6 +1,7 @@
 import axios from 'axios';
 import endpoints from './endpoints';
 import {retrieveData} from '../storage';
+import {createAsyncThunk} from '@reduxjs/toolkit';
 
 const API_URL = 'http://localhost:8000/api/';
 
@@ -38,10 +39,10 @@ interface restaurants {
 }
 
 type signUpProps = {
-  username: string,
-  email: string,
-  password: string
-}
+  username: string;
+  email: string;
+  password: string;
+};
 
 const login = async (endpoint: string, data: string): Promise<any> => {
   try {
@@ -49,7 +50,7 @@ const login = async (endpoint: string, data: string): Promise<any> => {
     return response.data;
   } catch (error: any) {
     throw new Error(`API request to ${endpoint} failed${error.message}`);
-  } 
+  }
 };
 
 const signUp = async (endpoint: string, data: string): Promise<any> => {
@@ -70,6 +71,20 @@ const getAllUsers = async (endpoint: string) => {
   }
 };
 
+const getAllRestaurants = createAsyncThunk(
+  'restaurants/fetchAll',
+  async (endpoint: string) => {
+    try {
+      const response = await apiClient.get(`${endpoints[endpoint]}`);
+      return response.data.restaurants;
+    } catch (error: any) {
+      return Promise.reject(
+        error.message || 'An error occured will fetching the data',
+      );
+    }
+  },
+);
+
 const getRestaurants = async (endpoint: string) => {
   try {
     const response = await apiClient.get(`${endpoints[endpoint]}`);
@@ -89,4 +104,4 @@ const saveRestaurants = async (endpoint: string, data: restaurants) => {
   }
 };
 
-export {login, signUp, getAllUsers, getRestaurants, saveRestaurants};
+export {login, signUp, getAllUsers, getRestaurants, saveRestaurants, getAllRestaurants};

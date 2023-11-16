@@ -27,9 +27,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
             try {
                 retrieveData('token')
                     .then(token => {
-                        console.log(token, "token");
-                        if (token === "") {
-                            setTokenState(false)
+                        console.log(token, 'token');
+                        if (token === '') {
+                            setTokenState(false);
                         } else {
                             setTokenState(true);
                         }
@@ -49,10 +49,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const setToken = async (newToken: string) => {
         try {
             storeData('token', newToken);
-            if (newToken !== "") {
-                setTokenState(true)
+            if (newToken !== '') {
+                setTokenState(true);
             } else {
-                setTokenState(false)
+                setTokenState(false);
             }
         } catch (error) {
             console.error('Error storing token in AsyncStorage:', error);

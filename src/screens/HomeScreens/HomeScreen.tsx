@@ -1,47 +1,77 @@
-import { FlatList, StyleSheet, Text, View } from 'react-native'
+import { ActivityIndicator, Dimensions, FlatList, ScrollView, StyleSheet, Text, View } from 'react-native'
 import React, { useEffect, useState } from 'react';
-import { getAllUsers, getRestaurants } from '../../services/api';
+import { getAllRestaurants } from '../../services/api';
+import HomeHeader from '../../components/Headers/HomeHeader';
+import { Searchbar } from 'react-native-paper';
+import { useAppDispatch, useAppSelector } from '../../Redux/hooks';
+import { primaryColor } from '../../assets/color';
 
-type Props = {}
 
-type userData = {
-  name: string,
-  location: string,
-  // rating: number,
-  createdAt: string
-}
+const { width, height } = Dimensions.get('window';
 
-const HomeScreen = (props: Props) => {
-  const [users, setUsers] = useState<userData[]>([]);
+const HomeScreen = () => {
+  const dispatch = useAppDispatch();
+  const [serachQuery, setSearchQuery] = useState('');
+  const { data, loading, error } = useAppSelector(state => state.restaurants);
 
-  const getUsers = async () => {
-    try {
-      const getRestaurantsList = await getRestaurants('GET_RESTAURANTS');
-      if (getRestaurantsList) {
-        setUsers(getRestaurantsList);
-      }
-    } catch (error: any) {
-      console.error("===>Error will getting users", error);
-      // throw new Error(error.message)
+  useEffect(() => {
+    dispatch(getAllRestaurants('GET_RESTAURANTS'))
+  }, []);
+
+  const loadingFotter = () => {
+    if (loading === 'pending') {
+      return <ActivityIndicator size="large"  color={primaryColor}/>;
     }
   }
 
-  useEffect(() => {
-    getUsers()
-  }, []);
-
   return (
     <View style={{ flex: 1 }}>
+      {/* <ScrollView>
+        <>
+          <HomeHeader />
+          <View style={{ margin: 20 }}>
+            <Searchbar value={serachQuery} placeholder='Search resturent' />
+            <View>
+              <View>
+                <View style={{ width: width / 2, height: 100, justifyContent: 'center', alignItems: 'center', backgroundColor: 'white' }}><Text>Test1</Text></View>
+                <View style={{ width: width / 2, height: 100, justifyContent: 'center', alignItems: 'center', backgroundColor: 'white' }}><Text>Test1</Text></View>
+              </View>
+              <View>
+                <View style={{ width: width / 2, height: 100, justifyContent: 'center', alignItems: 'center', backgroundColor: 'white' }}><Text>Test1</Text></View>
+                <View style={{ width: width / 2, height: 100, justifyContent: 'center', alignItems: 'center', backgroundColor: 'white' }}><Text>Test1</Text></View>
+              </View>
+              <View>
+                <View style={{ width: width / 2, height: 100, justifyContent: 'center', alignItems: 'center', backgroundColor: 'white' }}><Text>Test1</Text></View>
+                <View style={{ width: width / 2, height: 100, justifyContent: 'center', alignItems: 'center', backgroundColor: 'white' }}><Text>Test1</Text></View>
+              </View>
+              <View>
+                <View style={{ width: width / 2, height: 100, justifyContent: 'center', alignItems: 'center', backgroundColor: 'white' }}><Text>Test1</Text></View>
+                <View style={{ width: width / 2, height: 100, justifyContent: 'center', alignItems: 'center', backgroundColor: 'white' }}><Text>Test1</Text></View>
+              </View>
+              <View>
+                <View style={{ width: width / 2, height: 100, justifyContent: 'center', alignItems: 'center', backgroundColor: 'white' }}><Text>Test1</Text></View>
+                <View style={{ width: width / 2, height: 100, justifyContent: 'center', alignItems: 'center', backgroundColor: 'white' }}><Text>Test1</Text></View>
+              </View>
+              <View>
+                <View style={{ width: width / 2, height: 100, justifyContent: 'center', alignItems: 'center', backgroundColor: 'white' }}><Text>Test1</Text></View>
+                <View style={{ width: width / 2, height: 100, justifyContent: 'center', alignItems: 'center', backgroundColor: 'white' }}><Text>Test1</Text></View>
+              </View>
+            </View>
+          </View>
+        </>
+      </ScrollView> */}
       <FlatList
-        data={users}
+        data={data}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item, index }) => (
           <View style={{ ...styles.listSty }}>
             <Text>{item.name}</Text>
           </View>
         )}
+        ListFooterComponent={loadingFotter}
       />
     </View>
+
   )
 }
 
