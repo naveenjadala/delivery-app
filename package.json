@@ -15,7 +15,8 @@
     "start:prod": "NODE_ENV=production react-native start",
     "build:prod": "NODE_ENV=production react-native build",
     "devtools": "react-devtools",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "prepare": "husky install"
   },
   "husky": {
     "hooks": {
@@ -58,6 +59,8 @@
     "@babel/core": "^7.20.0",
     "@babel/preset-env": "^7.20.0",
     "@babel/runtime": "^7.20.0",
+    "@commitlint/cli": "^18.4.2",
+    "@commitlint/config-conventional": "^18.4.2",
     "@react-native/eslint-config": "^0.72.2",
     "@react-native/metro-config": "^0.72.11",
     "@testing-library/jest-native": "^5.4.3",
