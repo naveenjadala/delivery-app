@@ -29,6 +29,10 @@ build/
 local.properties
 *.iml
 .idea/
+.apk
+android/app/build/
+android/app/src/main/jniLibs/
+android/app/build/
 
 # node.js
 #
@@ -67,4 +71,3 @@ android/app/src/main/res/raw/app.json
 /ios/Podfile.lock
 android/app/src/main/assets/index.android.bundle
 android/app/src/main/res/drawable-*/node_modules_*.png
-app-stage-arm64-v8a-release.apk
