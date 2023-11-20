@@ -1,9 +1,11 @@
 import axios from 'axios';
 import endpoints from './endpoints';
-import {retrieveData} from '../storage';
-import {createAsyncThunk} from '@reduxjs/toolkit';
+import { retrieveData } from '../storage';
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import { Alert } from 'react-native';
+import Config from 'react-native-config';
 
-const API_URL = 'http://localhost:8000/api/';
+const API_URL = Config.API_URL;
 
 const apiClient = axios.create({
   baseURL: API_URL,
@@ -18,7 +20,7 @@ apiClient.interceptors.request.use(
     if (config.url !== '/user/login') {
       const token = await retrieveData('token');
       if (token) {
-        config.headers['Authorization'] = `Bearer ${token}`;
+        config.headers.Authorization = `Bearer ${token}`;
       }
     }
     return config;
@@ -28,21 +30,21 @@ apiClient.interceptors.request.use(
   },
 );
 
-interface loginData {
-  email: string;
-  password: string;
-}
+// interface loginData {
+//   email: string;
+//   password: string;
+// }
 
 interface restaurants {
   name: string;
   location: string;
 }
 
-type signUpProps = {
-  username: string;
-  email: string;
-  password: string;
-};
+// type signUpProps = {
+//   username: string;
+//   email: string;
+//   password: string;
+// };
 
 const login = async (endpoint: string, data: string): Promise<any> => {
   try {
@@ -78,6 +80,7 @@ const getAllRestaurants = createAsyncThunk(
       const response = await apiClient.get(`${endpoints[endpoint]}`);
       return response.data.restaurants;
     } catch (error: any) {
+      Alert.alert('Api filed', error);
       return Promise.reject(
         error.message || 'An error occured will fetching the data',
       );
@@ -104,4 +107,11 @@ const saveRestaurants = async (endpoint: string, data: restaurants) => {
   }
 };
 
-export {login, signUp, getAllUsers, getRestaurants, saveRestaurants, getAllRestaurants};
+export {
+  login,
+  signUp,
+  getAllUsers,
+  getRestaurants,
+  saveRestaurants,
+  getAllRestaurants,
+};

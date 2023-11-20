@@ -66,7 +66,7 @@ const HomeScreen = () => {
       </ScrollView> */}
       <FlatList
         data={data}
-        keyExtractor={index => index.toString()}
+        keyExtractor={item => item?.id.toString()}
         renderItem={({ item }) => (
           <View style={{ ...styles.listSty }}>
             <Text>{item.name}</Text>

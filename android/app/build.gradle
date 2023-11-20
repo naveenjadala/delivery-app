@@ -1,6 +1,17 @@
 apply plugin: "com.android.application"
 apply plugin: "com.facebook.react"
 
+
+project.ext.envConfigFiles =[
+    prodebug: ".env.production",
+    prodrelease: ".env.production",
+    devrelease: ".env.development",
+    devdebug: ".env.development",
+    stagerelease: ".env.staging",
+    stagedebug: ".env.staging"
+]
+apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
+
 /**
  * This is the configuration block to customize your React Native Android app.
  * By default you don't need to apply any configuration, just uncomment the lines you need.
@@ -73,6 +84,26 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
+
+    // flavors
+    
+    flavorDimensions "default"
+    productFlavors {
+        dev {
+            applicationId "deliveryapp.dev"
+            resValue "string", "build_config_package", "com.deliveryapp"
+        }
+        stage {
+            applicationId "deliveryapp.stage"
+            resValue "string", "build_config_package", "com.deliveryapp"
+        }
+        prod {
+            applicationId "deliveryapp"
+            resValue "string", "build_config_package", "com.deliveryapp"
+        }
+    }
+
+
     namespace "com.deliveryapp"
     defaultConfig {
         applicationId "com.deliveryapp"
@@ -92,6 +123,7 @@ android {
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
+            buildConfigField "boolean", "DEBUG", "true"
         }
         release {
             // Caution! In production, you need to generate your own keystore file.
@@ -99,6 +131,7 @@ android {
             signingConfig signingConfigs.debug
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            buildConfigField "boolean", "DEBUG", "false"
         }
     }
 }
