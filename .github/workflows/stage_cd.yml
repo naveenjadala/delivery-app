@@ -16,16 +16,16 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Install Firebase CLI
-        uses: npm install
+        run: npm install
 
       - name: Run Test
-        uses: npm test
+        run: npm test
 
       - name: Authenticate with Firebase
-        uses: firebase login:ci --token "$FIREBASE_TOKEN"
+        run: firebase login:ci --token "$FIREBASE_TOKEN"
 
       - name: Build and Distribute
-        uses: if [ "${{ github.event.inputs.environment }}" == "staging" ]; then
+        run: if [ "${{ github.event.inputs.environment }}" == "staging" ]; then
                 echo "Deploying to staging..."
                 firebase appdistribution:distribute 
                 --app com.delivery.stage 
