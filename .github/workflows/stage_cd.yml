@@ -1,10 +1,12 @@
 name: stage-distribution
 
 on:
-  push:
-    branches:
-      - newStage
-
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to deploy to'
+        required: true
+        default: 'staging'
 jobs:
   distribute:
     runs-on: ubuntu-latest
