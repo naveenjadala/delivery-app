@@ -71,3 +71,13 @@ android/app/src/main/res/raw/app.json
 /ios/Podfile.lock
 android/app/src/main/assets/index.android.bundle
 android/app/src/main/res/drawable-*/node_modules_*.png
+
+# Ignore code coverage files and directories
+coverage/
+.coverage
+.coverage.*
+.coverage.[0-9]*
+.coverage.[0-9]*/          # For some tools that generate coverage in separate directories
+
+# Ignore pytest coverage files
+htmlcov/

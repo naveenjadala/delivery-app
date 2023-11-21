@@ -1,0 +1,36 @@
+name: stage-distribution
+
+on:
+  push:
+    branches:
+      - stage
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install Firebase CLI
+        uses: npm install
+
+      - name: Run Test
+        uses: npm test
+
+      - name: Authenticate with Firebase
+        uses: firebase login:ci --token "$FIREBASE_TOKEN"
+
+      - name: Build and Distribute
+        uses: firebase appdistribution:distribute 
+              --app com.delivery.stage 
+              --groups ${{ secrets.GROUP_NAME }}
+              --file android/app/build/outputs/apk/stage/app-stage-release.apk 
+              --token "$FIREBASE_TOKEN"
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          APP_ID: ${{ secrets.APP_ID }}
+          GROUP_NAME: ${{ secrets.GROUP_NAME }}
+
+      
