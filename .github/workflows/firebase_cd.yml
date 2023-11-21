@@ -32,6 +32,7 @@ jobs:
           if [ "${{ github.event.inputs.environment }}" == "staging" ]; then
             echo "Deploying to staging..."
             firebase appdistribution:distribute \
+              android/app/build/outputs/apk/stage/app-stage-release.apk \
               --app com.delivery.stage \
               --groups ${{ secrets.GROUP_NAME }} \
               --file android/app/build/outputs/apk/stage/app-stage-release.apk \
@@ -39,9 +40,9 @@ jobs:
           elif [ "${{ github.event.inputs.environment }}" == "production" ]; then
             echo "Deploying to production..."
             firebase appdistribution:distribute \
+              android/app/build/outputs/apk/dev/app-stage-release.apk \
               --app com.delivery.dev \
               --groups ${{ secrets.GROUP_NAME }} \
-              --file android/app/build/outputs/apk/dev/app-stage-release.apk \
               --token "$FIREBASE_TOKEN"
           else
             echo "Invalid environment specified."
