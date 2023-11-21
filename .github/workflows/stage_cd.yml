@@ -1,4 +1,4 @@
-name: stage-distribution
+name: stage distribution
 
 on:
   workflow_dispatch:
