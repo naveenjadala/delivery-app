@@ -27,9 +27,6 @@ jobs:
       - name: Run Test
         run: npm test
 
-      - name: Authenticate with Firebase
-        run: firebase login:ci --token "$FIREBASE_TOKEN"
-
       - name: Build and Distribute
         run: |
           if [ "${{ github.event.inputs.environment }}" == "staging" ]; then
