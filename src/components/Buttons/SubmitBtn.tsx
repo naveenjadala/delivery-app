@@ -16,7 +16,7 @@ const SubmitBtn: React.FC<ButtonProps> = ({ lable, ...props }) => {
   return (
     <>
       <TouchableOpacity style={{ ...styles.btnSty }} {...props}>
-        <Text style={{ ...styles.lableSty }}>test{lable}</Text>
+        <Text style={{ ...styles.lableSty }}>{lable}</Text>
       </TouchableOpacity>
     </>
   );
