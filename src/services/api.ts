@@ -3,12 +3,12 @@ import endpoints from './endpoints';
 import { retrieveData } from '../storage';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { Alert } from 'react-native';
-import Config from 'react-native-config';
+// import Config from 'react-native-config';
 
-const API_URL = Config.API_URL;
+// const API_URL = Config.API_URL;
 
 const apiClient = axios.create({
-  baseURL: API_URL,
+  baseURL: 'http://localhost:8000/api/',
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
