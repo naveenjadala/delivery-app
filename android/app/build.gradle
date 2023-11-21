@@ -1,5 +1,7 @@
 apply plugin: "com.android.application"
 apply plugin: "com.facebook.react"
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.appdistribution'
 
 
 project.ext.envConfigFiles =[
@@ -90,15 +92,15 @@ android {
     flavorDimensions "default"
     productFlavors {
         dev {
-            applicationId "deliveryapp.dev"
+            applicationId "com.deliveryapp.dev"
             resValue "string", "build_config_package", "com.deliveryapp"
         }
         stage {
-            applicationId "deliveryapp.stage"
+            applicationId "com.deliveryapp.stage"
             resValue "string", "build_config_package", "com.deliveryapp"
         }
         prod {
-            applicationId "deliveryapp"
+            applicationId "com.deliveryapp"
             resValue "string", "build_config_package", "com.deliveryapp"
         }
     }
