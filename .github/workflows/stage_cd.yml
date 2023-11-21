@@ -3,7 +3,7 @@ name: stage-distribution
 on:
   push:
     branches:
-      - main
+      - newStage
 
 jobs:
   distribute:
