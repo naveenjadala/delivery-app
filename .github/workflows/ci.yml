@@ -7,7 +7,7 @@ on:
       - alpha
       - main
 
-job:
+jobs:
   build:
     runs-on: ubuntu-latest
 
