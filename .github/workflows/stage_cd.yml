@@ -25,11 +25,25 @@ jobs:
         uses: firebase login:ci --token "$FIREBASE_TOKEN"
 
       - name: Build and Distribute
-        uses: firebase appdistribution:distribute 
-              --app com.delivery.stage 
-              --groups ${{ secrets.GROUP_NAME }}
-              --file android/app/build/outputs/apk/stage/app-stage-release.apk 
-              --token "$FIREBASE_TOKEN"
+        uses: if [ "${{ github.event.inputs.environment }}" == "staging" ]; then
+                echo "Deploying to staging..."
+                firebase appdistribution:distribute 
+                --app com.delivery.stage 
+                --groups ${{ secrets.GROUP_NAME }}
+                --file android/app/build/outputs/apk/stage/app-stage-release.apk 
+                --token "$FIREBASE_TOKEN"
+              elif [ "${{ github.event.inputs.environment }}" == "production" ]; then
+                echo "Deploying to production..."
+                firebase appdistribution:distribute 
+                --app com.delivery.dev 
+                --groups ${{ secrets.GROUP_NAME }}
+                --file android/app/build/outputs/apk/dev/app-stage-release.apk 
+                --token "$FIREBASE_TOKEN"
+              # Add deployment commands for production
+              else
+                echo "Invalid environment specified."
+                exit 1
+              fi
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
           APP_ID: ${{ secrets.APP_ID }}
