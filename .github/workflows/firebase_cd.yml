@@ -50,6 +50,12 @@ jobs:
         run: |
           cd android && ./gradlew assembleStageRelease --no-daemon
 
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: app-stage-release.apk
+          path: android/app/build/outputs/apk/stage/release/
+
       - name: Build and Distribute
         env:
           FIREBASE_SA_KEY: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
