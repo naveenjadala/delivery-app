@@ -89,7 +89,7 @@ android {
 
     // flavors
     
-    flavorDimensions "default"
+    flavorDimensions "prod"
     productFlavors {
         dev {
             applicationId "com.deliveryapp.dev"
