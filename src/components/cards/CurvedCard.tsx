@@ -8,9 +8,9 @@ import {
 } from 'react-native';
 import React from 'react';
 import SolidLine from '../Lines/SolidLine';
-import {dynamicFontSize} from '../../utils/DynamicStylingUtils';
+import { dynamicFontSize } from '../../utils/DynamicStylingUtils';
 import LOGO from '../../assets/images/logo.png';
-import type {EasingFunction} from 'react-native';
+import type { EasingFunction } from 'react-native';
 
 interface CardProps {
   type: string;
@@ -30,15 +30,17 @@ const AuthButtonsComponent: React.FC<buttonProps> = ({
 }) => {
   return (
     <TouchableOpacity
-      style={{alignItems: 'center'}}
+      style={{ alignItems: 'center' }}
       onPress={() => onPress(title)}>
-      <Text style={{padding: 10, fontSize: dynamicFontSize(14)}}>{title}</Text>
+      <Text style={{ padding: 10, fontSize: dynamicFontSize(14) }}>
+        {title}
+      </Text>
       {type === title && <SolidLine />}
     </TouchableOpacity>
   );
 };
 
-const CurvedCard: React.FC<CardProps> = ({type, onPress}) => {
+const CurvedCard: React.FC<CardProps> = ({ type, onPress }) => {
   const logoAnimate = new Animated.Value(0);
 
   const animateLogo = (easing: EasingFunction) => {
@@ -53,13 +55,13 @@ const CurvedCard: React.FC<CardProps> = ({type, onPress}) => {
 
   animateLogo(Easing.in(Easing.bounce));
   // useEffect(() => {  }, [])
-  const size = logoAnimate.interpolate({
-    inputRange: [0, 1],
-    outputRange: [0, 80],
-  });
+  // const size = logoAnimate.interpolate({
+  //   inputRange: [0, 1],
+  //   outputRange: [0, 80],
+  // });
 
   return (
-    <View style={{...styles.cardSty}}>
+    <View style={{ ...styles.cardSty }}>
       <View
         style={{
           justifyContent: 'center',
@@ -69,10 +71,11 @@ const CurvedCard: React.FC<CardProps> = ({type, onPress}) => {
         }}>
         <Animated.Image
           source={LOGO}
-          style={{width: '40%', opacity: logoAnimate}}
+          resizeMode="contain"
+          style={{ width: '40%', opacity: logoAnimate }}
         />
       </View>
-      <View style={{...styles.tabSty}}>
+      <View style={{ ...styles.tabSty }}>
         <AuthButtonsComponent type={type} onPress={onPress} title="Login" />
         <AuthButtonsComponent type={type} onPress={onPress} title="SignUp" />
       </View>
@@ -87,7 +90,7 @@ const styles = StyleSheet.create({
     height: 300,
     borderRadius: 15,
     shadowColor: '#000',
-    shadowOffset: {width: 0, height: 2},
+    shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.5,
     shadowRadius: 2,
     elevation: 3,
