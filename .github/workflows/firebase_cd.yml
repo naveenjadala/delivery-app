@@ -51,6 +51,10 @@ jobs:
           cd android && ./gradlew assembleStageRelease --no-daemon
 
       - name: Build and Distribute
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          APP_ID: ${{ secrets.APP_ID }}
+          GROUP_NAME: ${{ secrets.GROUP_NAME }}
         run: |
           if [ "${{ github.event.inputs.environment }}" == "staging" ]; then
             echo "Deploying to staging..."
@@ -70,7 +74,3 @@ jobs:
             echo "Invalid environment specified."
             exit 1
           fi
-        env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-          APP_ID: ${{ secrets.APP_ID }}
-          GROUP_NAME: ${{ secrets.GROUP_NAME }}
