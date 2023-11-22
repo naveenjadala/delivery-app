@@ -62,7 +62,7 @@ jobs:
               android/app/build/outputs/apk/stage/release/app-stage-release.apk \
               --app com.delivery.stage \
               --groups ${{ secrets.GROUP_NAME }} \
-              --token "$FIREBASE_TOKEN"
+              --firebase_token "$FIREBASE_TOKEN"
           elif [ "${{ github.event.inputs.environment }}" == "production" ]; then
             echo "Deploying to production..."
             firebase appdistribution:distribute \
