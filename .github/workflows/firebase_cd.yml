@@ -52,7 +52,7 @@ jobs:
 
       - name: Build and Distribute
         env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          FIREBASE_SA_KEY: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
           APP_ID: ${{ secrets.APP_ID }}
           GROUP_NAME: ${{ secrets.GROUP_NAME }}
         run: |
@@ -62,14 +62,14 @@ jobs:
               android/app/build/outputs/apk/stage/release/app-stage-release.apk \
               --app com.delivery.stage \
               --groups ${{ secrets.GROUP_NAME }} \
-              --token ${{ secrets.FIREBASE_TOKEN }}
+              --token "$(echo $FIREBASE_SA_KEY | base64 --decode)"
           elif [ "${{ github.event.inputs.environment }}" == "production" ]; then
             echo "Deploying to production..."
             firebase appdistribution:distribute \
               android/app/build/outputs/apk/dev/release/app-stage-release.apk \
               --app com.delivery.dev \
               --groups ${{ secrets.GROUP_NAME }} \
-              --token ${{ secrets.FIREBASE_TOKEN }}
+              --token "$(echo $FIREBASE_SA_KEY | base64 --decode)"
           else
             echo "Invalid environment specified."
             exit 1
