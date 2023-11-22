@@ -48,7 +48,7 @@ jobs:
 
       - name: Build Android App Bundle
         run: |
-          cd android && ./gradlew bundleRelease --no-daemon
+          cd android && ./gradlew bundlestageRelease --no-daemon
 
       - name: Build and Distribute
         run: |
