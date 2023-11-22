@@ -48,21 +48,21 @@ jobs:
 
       - name: Build Android App Bundle
         run: |
-          cd android && ./gradlew bundlestageRelease --no-daemon
+          cd android && ./gradlew assembleStageRelease --no-daemon
 
       - name: Build and Distribute
         run: |
           if [ "${{ github.event.inputs.environment }}" == "staging" ]; then
             echo "Deploying to staging..."
             firebase appdistribution:distribute \
-              android/app/build/outputs/apk/stage/app-stage-release.apk \
+              android/app/build/outputs/apk/stage/release/app-stage-release.apk \
               --app com.delivery.stage \
               --groups ${{ secrets.GROUP_NAME }} \
               --token "$FIREBASE_TOKEN"
           elif [ "${{ github.event.inputs.environment }}" == "production" ]; then
             echo "Deploying to production..."
             firebase appdistribution:distribute \
-              android/app/build/outputs/apk/dev/app-stage-release.apk \
+              android/app/build/outputs/apk/dev/release/app-stage-release.apk \
               --app com.delivery.dev \
               --groups ${{ secrets.GROUP_NAME }} \
               --token "$FIREBASE_TOKEN"
