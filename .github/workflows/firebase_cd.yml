@@ -56,6 +56,7 @@ jobs:
           APP_ID: ${{ secrets.APP_ID }}
           GROUP_NAME: ${{ secrets.GROUP_NAME }}
         run: |
+          echo "$FIREBASE_SA_KEY" | base64 --decode > /tmp/firebase_sa_key.json
           if [ "${{ github.event.inputs.environment }}" == "staging" ]; then
             echo "Deploying to staging..."
             firebase appdistribution:distribute \
