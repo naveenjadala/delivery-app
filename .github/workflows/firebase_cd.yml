@@ -60,14 +60,14 @@ jobs:
             echo "Deploying to staging..."
             firebase appdistribution:distribute \
               android/app/build/outputs/apk/stage/release/app-stage-release.apk \
-              --app com.delivery.stage \
+              --app ${{ secrets.APP_ID }} \
               --groups ${{ secrets.GROUP_NAME }} \
               --token "$(echo $FIREBASE_SA_KEY | base64 --decode)"
           elif [ "${{ github.event.inputs.environment }}" == "production" ]; then
             echo "Deploying to production..."
             firebase appdistribution:distribute \
               android/app/build/outputs/apk/dev/release/app-stage-release.apk \
-              --app com.delivery.dev \
+              --app ${{ secrets.APP_ID }} \
               --groups ${{ secrets.GROUP_NAME }} \
               --token "$(echo $FIREBASE_SA_KEY | base64 --decode)"
           else
