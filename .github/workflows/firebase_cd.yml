@@ -63,6 +63,7 @@ jobs:
           FIREBASE_TOKEN=$(npx firebase login:ci --json | jq -r .token)
           echo "FIREBASE_CLI_TOKEN=$FIREBASE_TOKEN" >> $GITHUB_ENV
         env:
+          GOOGLE_APPLICATION_CREDENTIALS: firebase-service-account.json
           FIREBASE_CLI_TOKEN: ${{ steps.authenticate.outputs.FIREBASE_CLI_TOKEN }}
 
       - name: Deploy to Firebase
