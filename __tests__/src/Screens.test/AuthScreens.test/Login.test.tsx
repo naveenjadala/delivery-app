@@ -5,6 +5,12 @@ import * as api from '../../../../src/services/api';
 
 jest.useFakeTimers();
 
+jest.mock('@react-navigation/native', () => ({
+  useNavigation: () => {
+    return jest.fn;
+  },
+}));
+
 jest.mock('../../../../src/services/api', () => {
   const login = jest.fn(() =>
     Promise.resolve({ status: 'success', token: 'mockToken' }),

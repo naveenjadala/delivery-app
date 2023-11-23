@@ -4,6 +4,7 @@ exports[`LoginScreen should render correctly 1`] = `
 <RCTSafeAreaView
   style={
     {
+      "backgroundColor": "white",
       "flex": 1,
     }
   }
@@ -12,11 +13,84 @@ exports[`LoginScreen should render correctly 1`] = `
     contentContainerStyle={
       {
         "flexGrow": 1,
+        "margin": 30,
       }
     }
     keyboardShouldPersistTaps="handled"
   >
     <View>
+      <View
+        style={
+          {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "height": 60,
+          }
+        }
+      >
+        <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            {
+              "borderColor": "#000",
+              "borderRadius": 10,
+              "borderWidth": 1,
+              "height": 40,
+              "opacity": 1,
+              "padding": 10,
+              "width": 40,
+            }
+          }
+        >
+          <Text
+            allowFontScaling={false}
+            selectable={false}
+            style={
+              [
+                {
+                  "color": "#000",
+                  "fontSize": 20,
+                },
+                undefined,
+                {
+                  "fontFamily": "FontAwesome",
+                  "fontStyle": "normal",
+                  "fontWeight": "normal",
+                },
+                {},
+              ]
+            }
+          >
+            
+          </Text>
+        </View>
+      </View>
       <View
         onLayout={[Function]}
         style={
@@ -31,11 +105,25 @@ exports[`LoginScreen should render correctly 1`] = `
           ]
         }
       >
+        <Text
+          style={
+            {
+              "alignSelf": "flex-start",
+              "color": "#000",
+              "fontSize": 54,
+              "marginVertical": 10,
+              "textAlign": "left",
+            }
+          }
+        >
+          Welcome back! Glad 
+ to see you, Again!
+        </Text>
         <View
           style={
             {
               "marginTop": 20,
-              "width": "80%",
+              "width": "100%",
             }
           }
         >
@@ -45,9 +133,12 @@ exports[`LoginScreen should render correctly 1`] = `
             placeholder="Email Address"
             style={
               {
-                "borderBottomWidth": 0.5,
+                "backgroundColor": "#F7F8F9",
                 "borderColor": "#000",
+                "borderRadius": 8,
+                "borderWidth": 0.5,
                 "marginVertical": 15,
+                "padding": 10,
               }
             }
             value=""
@@ -58,13 +149,64 @@ exports[`LoginScreen should render correctly 1`] = `
             secureTextEntry={true}
             style={
               {
-                "borderBottomWidth": 0.5,
+                "backgroundColor": "#F7F8F9",
                 "borderColor": "#000",
+                "borderRadius": 8,
+                "borderWidth": 0.5,
                 "marginVertical": 15,
+                "padding": 10,
               }
             }
             value=""
           />
+          <View
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
+            accessible={true}
+            collapsable={false}
+            focusable={false}
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              {
+                "opacity": 1,
+              }
+            }
+          >
+            <Text
+              style={
+                {
+                  "alignSelf": "flex-end",
+                  "color": "#6A707C",
+                  "fontFamily": "Urbanist",
+                  "fontSize": 14,
+                  "fontWeight": "600",
+                }
+              }
+            >
+              Forgot Password?
+            </Text>
+          </View>
           <View
             collapsable={false}
             style={
@@ -105,11 +247,11 @@ exports[`LoginScreen should render correctly 1`] = `
               style={
                 {
                   "alignItems": "center",
-                  "backgroundColor": "#FA4A0C",
-                  "borderRadius": 15,
-                  "height": 50,
+                  "backgroundColor": "black",
+                  "borderRadius": 10,
+                  "height": 60,
                   "justifyContent": "center",
-                  "marginVertical": 20,
+                  "marginVertical": 10,
                   "opacity": 1,
                   "width": "100%",
                 }

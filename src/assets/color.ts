@@ -1,2 +1,5 @@
-export const primaryColor = '#FA4A0C';
+export const primaryColor = '#35C2C1';
 export const secondaryColor = '#000';
+export const GrayShade = '#6A707C';
+export const borderColor = '#E8ECF4';
+export const textBgColor = '#F7F8F9';
