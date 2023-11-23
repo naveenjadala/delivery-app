@@ -56,36 +56,48 @@ jobs:
           name: app-stage-release.apk
           path: android/app/build/outputs/apk/stage/release/
 
+
+      - name: Authenticate with Firebase
+        run: |
+          echo "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}" > firebase-service-account.json
+          npx firebase --no-localhost login:ci --json > firebase-token.json
+        env:
+          FIREBASE_CLI_TOKEN: ${{ steps.authenticate.outputs.FIREBASE_CLI_TOKEN }}
+
+      - name: Deploy to Firebase
+        run: |
+          npx firebase deploy --only hosting --token $FIREBASE_CLI_TOKEN
+
       - name: Build and Distribute
         env:
           FIREBASE_SA_KEY: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
           APP_ID: ${{ secrets.APP_ID }}
           GROUP_NAME: ${{ secrets.GROUP_NAME }}
           notes: ${{ github.event.head_commit.message }}
-        uses: wzieba/Firebase-Distribution-Github-Action@v1
-        with:
-          appId: ${{ secrets.APP_ID }}
-          token: "$(echo $FIREBASE_SA_KEY | base64 --decode)"
-          groups: ${{ secrets.GROUP_NAME }}
-          file: android/app/build/outputs/apk/stage/release/app-stage-release.apk
+        # uses: wzieba/Firebase-Distribution-Github-Action@v1
+        # with:
+        #   appId: ${{ secrets.APP_ID }}
+        #   # token: "$(echo $FIREBASE_SA_KEY | base64 --decode)"
+        #   groups: ${{ secrets.GROUP_NAME }}
+        #   file: android/app/build/outputs/apk/stage/release/app-stage-release.apk
 
           
-        # run: |
-        #   if [ "${{ github.event.inputs.environment }}" == "staging" ]; then
-        #     echo "Deploying to staging..."
-        #     firebase appdistribution:distribute \
-        #       android/app/build/outputs/apk/stage/release/app-stage-release.apk \
-        #       --app ${{ secrets.APP_ID }} \
-        #       --groups ${{ secrets.GROUP_NAME }} \
-        #       --token "$(echo $FIREBASE_SA_KEY | base64 --decode)"
-        #   elif [ "${{ github.event.inputs.environment }}" == "production" ]; then
-        #     echo "Deploying to production..."
-        #     firebase appdistribution:distribute \
-        #       android/app/build/outputs/apk/dev/release/app-stage-release.apk \
-        #       --app ${{ secrets.APP_ID }} \
-        #       --groups ${{ secrets.GROUP_NAME }} \
-        #       --token "$(echo $FIREBASE_SA_KEY | base64 --decode)"
-        #   else
-        #     echo "Invalid environment specified."
-        #     exit 1
-        #   fi
+        run: |
+          if [ "${{ github.event.inputs.environment }}" == "staging" ]; then
+            echo "Deploying to staging..."
+            firebase appdistribution:distribute \
+              android/app/build/outputs/apk/stage/release/app-stage-release.apk \
+              --app ${{ secrets.APP_ID }} \
+              --groups ${{ secrets.GROUP_NAME }} \
+              --token "$(echo $FIREBASE_SA_KEY | base64 --decode)"
+          elif [ "${{ github.event.inputs.environment }}" == "production" ]; then
+            echo "Deploying to production..."
+            firebase appdistribution:distribute \
+              android/app/build/outputs/apk/dev/release/app-stage-release.apk \
+              --app ${{ secrets.APP_ID }} \
+              --groups ${{ secrets.GROUP_NAME }} \
+              --token "$(echo $FIREBASE_SA_KEY | base64 --decode)"
+          else
+            echo "Invalid environment specified."
+            exit 1
+          fi
