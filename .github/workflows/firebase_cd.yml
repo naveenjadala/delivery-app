@@ -80,7 +80,7 @@ jobs:
       - name: Deploy to Firebase
         run: |
           npx firebase use --add ${{ secrets.FIREBASE_PROJECT_ID }}
-          npx firebase deploy --only hosting --project ${{ secrets.FIREBASE_PROJECT_ID }} --config /firebase.json
+          npx firebase deploy --only hosting --project ${{ secrets.FIREBASE_PROJECT_ID }} --config ./staging/firebase.json
 
 
       - name: Build and Distribute
