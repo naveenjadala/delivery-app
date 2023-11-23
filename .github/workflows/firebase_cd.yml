@@ -66,10 +66,21 @@ jobs:
           GOOGLE_APPLICATION_CREDENTIALS: firebase-service-account.json
           FIREBASE_CLI_TOKEN: ${{ steps.authenticate.outputs.FIREBASE_CLI_TOKEN }}
 
+      # - name: Deploy to Firebase
+      #   run: |
+      #     npx firebase use --add ${{ secrets.FIREBASE_PROJECT_ID }}
+      #     npx firebase deploy --only hosting --project ${{ secrets.FIREBASE_PROJECT_ID }} --config /staging/firebase.json
+
+      - name: Print GOOGLE_APPLICATION_CREDENTIALS to file
+        shell: bash
+        run: 'echo "$GOOGLE_APPLICATION_CREDENTIALS" > firebase.json'
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+
       - name: Deploy to Firebase
         run: |
           npx firebase use --add ${{ secrets.FIREBASE_PROJECT_ID }}
-          npx firebase deploy --only hosting --project ${{ secrets.FIREBASE_PROJECT_ID }} --config /staging/firebase.json
+          npx firebase deploy --only hosting --project ${{ secrets.FIREBASE_PROJECT_ID }} --config /firebase.json
 
 
       - name: Build and Distribute
@@ -89,6 +100,7 @@ jobs:
         run: |
           if [ "${{ github.event.inputs.environment }}" == "staging" ]; then
             echo "Deploying to staging..."
+            echo "$(echo $FIREBASE_SA_KEY | base64 --decode)"
             firebase appdistribution:distribute \
               android/app/build/outputs/apk/stage/release/app-stage-release.apk \
               --app ${{ secrets.APP_ID }} \
