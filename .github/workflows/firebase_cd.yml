@@ -68,7 +68,9 @@ jobs:
 
       - name: Deploy to Firebase
         run: |
-          npx firebase deploy --only hosting --token $FIREBASE_CLI_TOKEN
+          npx firebase use --add ${{ secrets.FIREBASE_PROJECT_ID }}
+          npx firebase deploy --only hosting --project ${{ secrets.FIREBASE_PROJECT_ID }} --config /staging/firebase.json
+
 
       - name: Build and Distribute
         env:
