@@ -63,8 +63,7 @@ jobs:
           appId: ${{secrets.APP_ID}}
           serviceCredentialsFileContent: ${{secrets.GOOGLE_APPLICATION_CREDENTIALS}}
           groups: ${{ secrets.GROUP_NAME }}
-          file: android/app/build/outputs/apk/debug/app-debug.apk
-
+          file:  android/app/build/outputs/apk/stage/release/app-stage-release.apk
 
       # - name: Authenticate with Firebase
       #   run: |
