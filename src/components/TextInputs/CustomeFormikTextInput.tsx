@@ -16,6 +16,7 @@ export default CustomeFormikTextInput;
 
 const styles = StyleSheet.create({
   inputSty: {
+    height: 55,
     borderColor: '#000',
     borderWidth: 0.5,
     marginVertical: 15,

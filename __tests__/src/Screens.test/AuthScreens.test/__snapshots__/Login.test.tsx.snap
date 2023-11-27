@@ -137,6 +137,7 @@ exports[`LoginScreen should render correctly 1`] = `
                 "borderColor": "#000",
                 "borderRadius": 8,
                 "borderWidth": 0.5,
+                "height": 55,
                 "marginVertical": 15,
                 "padding": 10,
               }
@@ -153,6 +154,7 @@ exports[`LoginScreen should render correctly 1`] = `
                 "borderColor": "#000",
                 "borderRadius": 8,
                 "borderWidth": 0.5,
+                "height": 55,
                 "marginVertical": 15,
                 "padding": 10,
               }
@@ -249,7 +251,7 @@ exports[`LoginScreen should render correctly 1`] = `
                   "alignItems": "center",
                   "backgroundColor": "black",
                   "borderRadius": 10,
-                  "height": 60,
+                  "height": 55,
                   "justifyContent": "center",
                   "marginVertical": 10,
                   "opacity": 1,
@@ -273,5 +275,59 @@ exports[`LoginScreen should render correctly 1`] = `
       </View>
     </View>
   </RCTScrollView>
+  <View>
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "alignItems": "center",
+          "margin": 20,
+          "opacity": 1,
+        }
+      }
+    >
+      <Text>
+        Don’t have an account?
+         
+        <Text
+          style={
+            {
+              "color": "#35C2C1",
+              "fontWeight": "500",
+              "textDecorationLine": "underline",
+            }
+          }
+        >
+          Register Now
+        </Text>
+      </Text>
+    </View>
+  </View>
 </RCTSafeAreaView>
 `;

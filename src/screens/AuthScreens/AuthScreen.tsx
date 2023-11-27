@@ -1,5 +1,4 @@
 import {
-  Image,
   ImageBackground,
   SafeAreaView,
   StyleSheet,
@@ -10,10 +9,10 @@ import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { LoginScreenNavigationProps } from '../../navigation/NavTypes';
 import LandingImg from '../../assets/images/landing_img.png';
-import LOGO from '../../assets/images/logo.png';
 import SubmitBtn from '../../components/Buttons/SubmitBtn';
 import { dynamicFontSize } from '../../utils/DynamicStylingUtils';
 import globalStyles from '../../assets/globalStyles';
+import RegisterTxt from '../../components/common/RegisterTxt';
 
 const AuthScreen = () => {
   const navigation = useNavigation<LoginScreenNavigationProps>();
@@ -24,12 +23,12 @@ const AuthScreen = () => {
         style={{ height: '100%', width: '100%' }}
         source={LandingImg}>
         <View style={{ ...styles.subContainer }}>
-          <View style={{ marginVertical: 25 }}>
-            <Image
+          <View style={{ marginVertical: 20 }}>
+            {/* <Image
               source={LOGO}
               resizeMode="contain"
               style={{ ...styles.imageSty }}
-            />
+            /> */}
             <Text style={{ ...styles.titleSty }}>Fruzz Food</Text>
           </View>
           <SubmitBtn
@@ -43,7 +42,12 @@ const AuthScreen = () => {
             onPress={() => navigation.navigate('SignUp')}
           />
         </View>
-        <Text style={{ ...styles.gustTxtSty }}>Continue as a guest</Text>
+        <View>
+          <RegisterTxt
+            redirectionTxt={'Continue as a guest'}
+            onPress={() => navigation.replace('SignUp')}
+          />
+        </View>
       </ImageBackground>
     </SafeAreaView>
   );
@@ -55,7 +59,7 @@ const styles = StyleSheet.create({
   subContainer: {
     justifyContent: 'flex-end',
     flex: 1,
-    marginBottom: 100,
+    marginBottom: 0,
     margin: 20,
   },
   gustTxtSty: {

@@ -20,6 +20,7 @@ import CustomeHeader from '../../components/Headers/CustomeHeader';
 import { useNavigation } from '@react-navigation/native';
 import { dynamicFontSize } from '../../utils/DynamicStylingUtils';
 import { LoginScreenNavigationProps } from '../../navigation/NavTypes';
+import RegisterTxt from '../../components/common/RegisterTxt';
 
 type loginProps = {
   email: string;
@@ -118,6 +119,13 @@ const LoginScreen = () => {
           </Formik>
         </KeyboardAvoidingView>
       </ScrollView>
+      <View>
+        <RegisterTxt
+          content={'Don’t have an account?'}
+          redirectionTxt={'Register Now'}
+          onPress={() => navigation.replace('SignUp')}
+        />
+      </View>
     </SafeAreaView>
   );
 };
