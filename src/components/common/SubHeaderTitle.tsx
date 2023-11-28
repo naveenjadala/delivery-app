@@ -1,25 +1,25 @@
-import { StyleSheet, Text } from 'react-native';
 import React from 'react';
+import { StyleSheet, Text } from 'react-native';
 import { dynamicFontSize } from '../../utils/DynamicStylingUtils';
-import { secondaryColor } from '../../assets/color';
+import { subHeadingColor } from '../../assets/color';
 
-interface titleProps {
+interface subheadingProps {
   title: string;
   style?: object;
 }
 
-const HeaderTitle: React.FC<titleProps> = ({ title, style }) => {
+const SubHeaderTitle: React.FC<subheadingProps> = ({ title, style }) => {
   return <Text style={{ ...styles.headerSty, ...style }}>{title}</Text>;
 };
 
-export default HeaderTitle;
+export default SubHeaderTitle;
 
 const styles = StyleSheet.create({
   headerSty: {
-    fontSize: dynamicFontSize(23),
+    fontSize: dynamicFontSize(12),
     marginVertical: 10,
     textAlign: 'left',
     // alignSelf: 'flex-start',
-    color: secondaryColor,
+    color: subHeadingColor,
   },
 });

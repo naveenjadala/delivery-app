@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react-native';
+import { render, fireEvent, screen } from '@testing-library/react-native';
 import CustomeFormikTextInput from '../../../../src/components/TextInputs/CustomeFormikTextInput';
 
 describe('custome Text input', () => {
@@ -17,7 +17,7 @@ describe('custome Text input', () => {
 
   it('call text change when the text change', async () => {
     const onChangeText = jest.fn();
-    const { getByPlaceholderText } = render(
+    render(
       <CustomeFormikTextInput
         placeholder="Test Placeholder"
         value=""
@@ -25,8 +25,8 @@ describe('custome Text input', () => {
       />,
     );
 
-    const input = getByPlaceholderText('Test Placeholder');
-    await fireEvent.changeText(input, 'test input');
+    const input = screen.getByPlaceholderText('Test Placeholder');
+    fireEvent.changeText(input, 'test input');
     expect(onChangeText).toHaveBeenCalledWith('test input');
   });
 });

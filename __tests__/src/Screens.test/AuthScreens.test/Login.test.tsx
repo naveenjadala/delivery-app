@@ -20,14 +20,14 @@ jest.mock('../../../../src/services/api', () => {
   };
 });
 
-describe('LoginScreen', () => {
+describe('<LoginScreen />', () => {
   //snapshot
   it('should render correctly', () => {
     const { toJSON } = render(<LoginScreen />);
     expect(toJSON()).toMatchSnapshot();
   });
 
-  //fields test
+  //intigration test
   it('should allow user input in the email and password field', () => {
     const { getByPlaceholderText } = render(<LoginScreen />);
     const emailInput = getByPlaceholderText('Email Address');

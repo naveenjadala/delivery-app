@@ -7,18 +7,18 @@ import {
   View,
 } from 'react-native';
 import React from 'react';
-import HeaderTitle from '../../components/common/HeaderTitle';
-import SubmitBtn from '../../components/Buttons/SubmitBtn';
 import CustomeHeader from '../../components/Headers/CustomeHeader';
+import SubHeaderTitle from '../../components/common/SubHeaderTitle';
+import HeaderTitle from '../../components/common/HeaderTitle';
+import { GrayShade } from '../../assets/color';
 import { useNavigation } from '@react-navigation/native';
 import { LoginScreenNavigationProps } from '../../navigation/NavTypes';
-import { GrayShade } from '../../assets/color';
 import CustomeFormikTextInput from '../../components/TextInputs/CustomeFormikTextInput';
-import RegisterTxt from '../../components/common/RegisterTxt';
-import SubHeaderTitle from '../../components/common/SubHeaderTitle';
+import SubmitBtn from '../../components/Buttons/SubmitBtn';
 
-const ForgotPassword = () => {
+const NewPassword = () => {
   const navigation = useNavigation<LoginScreenNavigationProps>();
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
       <ScrollView
@@ -32,36 +32,28 @@ const ForgotPassword = () => {
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
           style={styles.container}>
           <View>
-            <HeaderTitle title="Forgot Password?" />
+            <HeaderTitle title="Create new password" />
             <SubHeaderTitle
               title={
-                "Don't worry! It occurs. Please enter the email address linked with your account."
+                'Your new password must be unique from those previously used.'
               }
             />
             <View style={{ marginVertical: 20 }}>
-              <CustomeFormikTextInput placeholder="Enter your email" />
+              <CustomeFormikTextInput placeholder="New Password" />
+              <CustomeFormikTextInput placeholder="Confirm Password" />
             </View>
-
             <SubmitBtn
-              lable="Send Code"
-              onPress={() => navigation.navigate('NewPassword')}
+              lable="Reset Password"
+              onPress={() => navigation.navigate('PasswordSuccessScreen')}
             />
           </View>
         </KeyboardAvoidingView>
       </ScrollView>
-      <View>
-        <RegisterTxt
-          content={'Remember Password? '}
-          redirectionTxt={'Login'}
-          onPress={() => navigation.navigate('Login')}
-        />
-      </View>
     </SafeAreaView>
   );
 };
 
-export default ForgotPassword;
-
+export default NewPassword;
 const styles = StyleSheet.create({
   container: {
     flex: 1,

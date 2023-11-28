@@ -5,6 +5,8 @@ export type AuthStackNavProps = {
   Login: undefined;
   SignUp: undefined;
   ForgotPassword: undefined;
+  NewPassword: undefined;
+  PasswordSuccessScreen: undefined;
 };
 
 export type LoginScreenNavigationProps = NativeStackNavigationProp<
