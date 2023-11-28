@@ -54,6 +54,7 @@ To run the test
 npm test
 # using npm to run the test with watch
 npm run test:watch
+```
 
 ## Step 4: Modifying the App
 
