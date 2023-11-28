@@ -46,7 +46,16 @@ If everything is set up _correctly_, you should see your new app running in your
 
 This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
 
-## Step 3: Modifying your App
+## Step 3: Test the App
+To run the test
+
+```bash
+# using npm to run the test
+npm test
+# using npm to run the test with watch
+npm run test:watch
+
+## Step 4: Modifying the App
 
 Now that you have successfully run the app, let's modify it.
 
