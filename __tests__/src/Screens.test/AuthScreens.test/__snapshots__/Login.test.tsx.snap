@@ -129,6 +129,7 @@ exports[`<LoginScreen /> should render correctly 1`] = `
         >
           <TextInput
             keyboardType="email-address"
+            onBlur={[Function]}
             onChangeText={[Function]}
             placeholder="Email Address"
             style={
@@ -145,6 +146,7 @@ exports[`<LoginScreen /> should render correctly 1`] = `
             value=""
           />
           <TextInput
+            onBlur={[Function]}
             onChangeText={[Function]}
             placeholder="Password"
             secureTextEntry={true}

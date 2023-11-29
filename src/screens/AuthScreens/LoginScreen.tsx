@@ -15,12 +15,13 @@ import { Formik } from 'formik';
 import { AuthContext } from './AuthContext';
 import SubmitBtn from '../../components/Buttons/SubmitBtn';
 import CustomeFormikTextInput from '../../components/TextInputs/CustomeFormikTextInput';
-import { GrayShade, secondaryColor } from '../../assets/color';
+import { GrayShade } from '../../assets/color';
 import CustomeHeader from '../../components/Headers/CustomeHeader';
 import { useNavigation } from '@react-navigation/native';
-import { dynamicFontSize } from '../../utils/DynamicStylingUtils';
 import { LoginScreenNavigationProps } from '../../navigation/NavTypes';
 import RegisterTxt from '../../components/common/RegisterTxt';
+import HeaderTitle from '../../components/common/HeaderTitle';
+import validationSchema from '../../utils/ValidationSchema';
 
 type loginProps = {
   email: string;
@@ -46,7 +47,6 @@ const LoginScreen = () => {
       console.error('Error will login', error);
     }
   };
-
   const startAnimation = () => {
     Animated.timing(ScaleValue, {
       toValue: 1,
@@ -72,37 +72,47 @@ const LoginScreen = () => {
         <KeyboardAvoidingView
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
           style={styles.container}>
-          <Text
-            style={{
-              fontSize: dynamicFontSize(23),
-              marginVertical: 10,
-              textAlign: 'left',
-              alignSelf: 'flex-start',
-              color: secondaryColor,
-            }}>
-            {'Welcome back! Glad \n to see you, Again!'}
-          </Text>
+          <HeaderTitle
+            title={'Welcome back! Glad \n to see you, Again!'}
+            style={{ alignSelf: 'flex-start' }}
+          />
           <Formik
             initialValues={{
               email: '',
               password: '',
             }}
+            validationSchema={validationSchema.LoginValidationSchema}
             onSubmit={values => loginApiCall(values)}>
-            {({ handleChange, handleSubmit, values }) => (
+            {({
+              handleChange,
+              handleSubmit,
+              handleBlur,
+              values,
+              touched,
+              errors,
+            }) => (
               <View style={styles.formContainer}>
                 <CustomeFormikTextInput
                   placeholder="Email Address"
                   keyboardType="email-address"
                   onChangeText={handleChange('email')}
                   value={values.email}
+                  onBlur={handleBlur('email')}
                 />
+                {touched.email && errors.email && (
+                  <Text style={{ color: 'red' }}>{errors.email}</Text>
+                )}
 
                 <CustomeFormikTextInput
                   secureTextEntry
                   placeholder="Password"
                   onChangeText={handleChange('password')}
                   value={values.password}
+                  onBlur={handleBlur('password')}
                 />
+                {touched.password && errors.password && (
+                  <Text style={{ color: 'red' }}>{errors.password}</Text>
+                )}
 
                 <TouchableOpacity
                   onPress={() => navigation.navigate('ForgotPassword')}>
