@@ -17,6 +17,7 @@ import { LoginScreenNavigationProps } from '../../navigation/NavTypes';
 import { dynamicFontSize } from '../../utils/DynamicStylingUtils';
 import { secondaryColor } from '../../assets/color';
 import RegisterTxt from '../../components/common/RegisterTxt';
+import validationSchma from '../../utils/ValidationSchema';
 
 type signUpProps = {
   username: string;
@@ -66,8 +67,16 @@ const SignupScreen = () => {
           </Text>
           <Formik
             initialValues={{ email: '', password: '', username: '' }}
+            validationSchema={validationSchma.SignUpValidationSchema}
             onSubmit={values => signUpApi(values)}>
-            {({ handleChange, values, handleSubmit }) => (
+            {({
+              handleChange,
+              values,
+              handleSubmit,
+              handleBlur,
+              touched,
+              errors,
+            }) => (
               <View
                 style={{ width: '100%', alignSelf: 'center', marginTop: 10 }}>
                 <CustomeFormikTextInput
@@ -75,19 +84,32 @@ const SignupScreen = () => {
                   keyboardType="default"
                   onChangeText={handleChange('username')}
                   value={values.username}
+                  onBlur={handleBlur('username')}
                 />
+                {touched.username && errors.username && (
+                  <Text style={{ color: 'red' }}>{errors.username}</Text>
+                )}
+
                 <CustomeFormikTextInput
                   placeholder="Email Address"
                   keyboardType="email-address"
                   onChangeText={handleChange('email')}
                   value={values.email}
+                  onBlur={handleBlur('email')}
                 />
+                {touched.email && errors.email && (
+                  <Text style={{ color: 'red' }}>{errors.email}</Text>
+                )}
                 <CustomeFormikTextInput
                   secureTextEntry
                   placeholder="Password"
                   onChangeText={handleChange('password')}
                   value={values.password}
+                  onBlur={handleBlur('password')}
                 />
+                {touched.password && errors.password && (
+                  <Text style={{ color: 'red' }}>{errors.password}</Text>
+                )}
                 <View style={{ marginVertical: 20 }}>
                   <SubmitBtn lable="SignUp" onPress={() => handleSubmit()} />
                 </View>

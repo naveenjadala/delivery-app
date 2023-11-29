@@ -1,7 +1,6 @@
 import { StyleSheet, TextInput, TextInputProps } from 'react-native';
 import React from 'react';
 import { textBgColor } from '../../assets/color';
-
 interface CustomeTextInputProps extends TextInputProps {
   //add props if needed
 }
@@ -9,7 +8,11 @@ interface CustomeTextInputProps extends TextInputProps {
 const CustomeFormikTextInput: React.FC<CustomeTextInputProps> = ({
   ...props
 }) => {
-  return <TextInput {...props} style={{ ...styles.inputSty }} />;
+  return (
+    <>
+      <TextInput {...props} style={{ ...styles.inputSty }} />
+    </>
+  );
 };
 
 export default CustomeFormikTextInput;
