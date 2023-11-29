@@ -18,7 +18,7 @@ jobs:
 
       - name: Node Install
         run: |
-          npm install
+          npm install --force
 
       - name: Install Firebase CLI
         run: |
@@ -63,4 +63,4 @@ jobs:
           appId: ${{secrets.APP_ID}}
           serviceCredentialsFileContent: ${{secrets.GOOGLE_APPLICATION_CREDENTIALS}}
           groups: ${{ secrets.GROUP_NAME }}
-          file:  android/app/build/outputs/apk/stage/release/app-stage-release.apk
+          file: android/app/build/outputs/apk/stage/release/app-stage-release.apk

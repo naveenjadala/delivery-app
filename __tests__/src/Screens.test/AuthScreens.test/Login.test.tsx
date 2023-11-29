@@ -1,5 +1,11 @@
 import React from 'react';
-import { render, fireEvent, waitFor } from '@testing-library/react-native';
+import {
+  render,
+  fireEvent,
+  waitFor,
+  act,
+  screen,
+} from '@testing-library/react-native';
 import LoginScreen from '../../../../src/screens/AuthScreens/LoginScreen';
 import * as api from '../../../../src/services/api';
 
@@ -28,14 +34,16 @@ describe('<LoginScreen />', () => {
   });
 
   //intigration test
-  it('should allow user input in the email and password field', () => {
-    const { getByPlaceholderText } = render(<LoginScreen />);
-    const emailInput = getByPlaceholderText('Email Address');
-    const passwordInput = getByPlaceholderText('Password');
+  it('should allow user input in the email and password field', async () => {
+    render(<LoginScreen />);
 
-    fireEvent.changeText(emailInput, 'test@gmail.com');
-    fireEvent.changeText(passwordInput, 'password123');
+    const emailInput = await screen.findByPlaceholderText('Email Address');
+    const passwordInput = await screen.findByPlaceholderText('Password');
 
+    await act(async () => {
+      fireEvent.changeText(emailInput, 'test@gmail.com');
+      fireEvent.changeText(passwordInput, 'password123');
+    });
     expect(emailInput.props.value).toBe('test@gmail.com');
     expect(passwordInput.props.value).toBe('password123');
   });
