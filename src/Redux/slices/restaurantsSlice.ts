@@ -1,5 +1,5 @@
-import {createSlice} from '@reduxjs/toolkit';
-import {getAllRestaurants} from '../../services/api';
+import { createSlice } from '@reduxjs/toolkit';
+import { getAllRestaurants } from '../../services/api';
 
 interface restaurantsBody {
   createdAt?: string;
@@ -12,13 +12,13 @@ interface restaurantsBody {
 interface responseBody {
   data: Array<restaurantsBody>;
   loading: 'idle' | 'pending' | 'succeeded' | 'failed';
-  error: null | string
+  error: null | string;
 }
 
 const initialState: responseBody = {
   data: [],
   loading: 'idle',
-  error: null
+  error: null,
 };
 
 export const restaurantsSlice = createSlice({
@@ -27,7 +27,7 @@ export const restaurantsSlice = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder
-      .addCase(getAllRestaurants.pending, (state, action) => {
+      .addCase(getAllRestaurants.pending, state => {
         state.loading = 'pending';
       })
       .addCase(getAllRestaurants.fulfilled, (state, action) => {
@@ -37,7 +37,7 @@ export const restaurantsSlice = createSlice({
       .addCase(getAllRestaurants.rejected, (state, action) => {
         state.data = [];
         state.loading = 'failed';
-        state.error = action.payload as string
+        state.error = action.payload as string;
       });
   },
 });
